@@ -5,9 +5,12 @@ export const addToCart = async (req, res) => {
   try {
     const { userId, productId } = req.body;
 
+    console.log("Request Body:", req.body);
+    console.log("User ID:", userId);
+    console.log("Product ID:", productId);
+
     let cart = await Cart.findOne({ userId });
 
-    // Create cart if it doesn't exist
     if (!cart) {
       cart = new Cart({
         userId,
@@ -19,7 +22,6 @@ export const addToCart = async (req, res) => {
         ],
       });
     } else {
-      // Check if product already exists
       const item = cart.items.find(
         (i) => i.productId.toString() === productId
       );
@@ -41,6 +43,8 @@ export const addToCart = async (req, res) => {
       cart,
     });
   } catch (error) {
+    console.error("Add To Cart Error:", error);
+
     res.status(500).json({
       message: "Server Error",
       error: error.message,
