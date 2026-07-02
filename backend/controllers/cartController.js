@@ -37,6 +37,7 @@ export const addToCart = async (req, res) => {
     }
 
     await cart.save();
+    console.log("Saved Cart =", cart);
 
     res.status(200).json({
       message: "Item added to cart",

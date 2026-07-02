@@ -8,14 +8,17 @@ export default function Home() {
   const [category, setCategory] = useState("");
 
   const loadProducts = async () => {
-    try {
-      const res = await api.get(
-        `/products?search=${search}&category=${category}`
-      );
-      setProducts(res.data);
-    } catch (error) {
-      console.log(error);
-    }
+  try {
+    const res = await api.get(
+      `/products?search=${search}&category=${category}`
+    );
+
+    console.log(res.data); // Add this line
+
+    setProducts(res.data);
+  } catch (error) {
+    console.log(error);
+  }
   };
 
   useEffect(() => {
